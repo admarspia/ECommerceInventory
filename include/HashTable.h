@@ -24,17 +24,17 @@ private:
 
 #endif 
 
-/*## note ##
- * here we have the hash table to store Product using Product name it includes
- *      insert Product using the hash of the namespace
- *      remove Product by name
- *      get a vector that contains all products
- *
- * we used 2 dimentional matrix for storing the products and a hash function that is used for 
- * insert, search, remove operatins. each row of the vector is a list of products.
- * capacity determines max value of the hash from the hash function. 
- * 
- *
- * /
+/* note
+  here we have the hash table to store Product using Product name it includes
+       insert Product using the hash of the namespace
+       remove Product by name
+       get a vector that contains all products
+ 
+  we used 2 dimentional matrix for storing the products and a hash function that is used for 
+  insert, search, remove operatins. each row of the vector is a list of products.
+  capacity determines max value of the hash from the hash function. 
+  
+ 
+ */
 
 
