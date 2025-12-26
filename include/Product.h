@@ -21,3 +21,10 @@ struct Product {
 
 #endif
 
+
+/* ## note ##
+ * 
+ * Product has id, name, category, price and stock 
+ * We have overloaded constractor one No-argument and one with arugments of the properties of the Product.
+ *
+ * /

@@ -15,25 +15,37 @@ struct OrderItem {
 struct OrderNode {
     int orderId;
     std::string customer;
-    std::string date; // simple string date
+    std::string date; 
     std::vector<OrderItem> items;
     double total;
-    OrderNode* next; // for linked list
+    OrderNode* next; 
     OrderNode(int id, const std::string &cust, const std::string &date)
         : orderId(id), customer(cust), date(date), total(0.0), next(nullptr) {}
 };
 
 class OrderHistory {
-    public:
-        OrderHistory();
-        ~OrderHistory();
+public:
+    OrderHistory();
+    ~OrderHistory();
 
-        void addOrder(OrderNode* order);
-        std::vector<OrderNode*> toVector() const; // newest first
-        void printAll() const;
+    void addOrder(OrderNode* order);
+    std::vector<OrderNode*> toVector() const; 
+    void printAll() const;
 
-    private:
-        OrderNode* head; // most recent
+private:
+    OrderNode* head; 
 };
 
-#endif 
+#endif
+
+/*## Note ##
+ *
+ *  Data structures to help Order Managment and Track Order History
+ *  We got 
+ *      OrderItem: for storing single OrderItem info
+ *      OrderNode: for wrapping all order and facilitate Order Managment.
+ *      OrderHistory: to store and display all order History.
+ *
+ *      head: the History Managment make use of stack data type oreders are added and removed to  and from the end 
+ *      so we head is the most recent Order.
+ */

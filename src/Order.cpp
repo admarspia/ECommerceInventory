@@ -1,40 +1,38 @@
-./include/Order.h
-#ifndef ORDER_H
-#define ORDER_H
+#include "Order.h"
+#include <iostream>
 
-#include "Product.h"
-#include <string>
-#include <vector>
+OrderHistory::OrderHistory(): head(nullptr) {}
+OrderHistory::~OrderHistory() {
+    OrderNode* cur = head;
+    while (cur) {
+        OrderNode* nxt = cur->next;
+        delete cur;
+        cur = nxt;
+    }
+}
 
-struct OrderItem {
-    int productId;
-    std::string productName;
-    int quantity;
-    double unitPrice;
-};
+void OrderHistory::addOrder(OrderNode* order) {
+    order->next = head;
+    head = order; // add the most recent order to the end.
+}
 
-struct OrderNode {
-    int orderId;
-    std::string customer;
-    std::string date; // simple string date
-    std::vector<OrderItem> items;
-    double total;
-    OrderNode* next; // for linked list
-    OrderNode(int id, const std::string &cust, const std::string &date)
-        : orderId(id), customer(cust), date(date), total(0.0), next(nullptr) {}
-};
+std::vector<OrderNode*> OrderHistory::toVector() const {
+    std::vector<OrderNode*> v;
+    OrderNode* cur = head;
+    while (cur) { v.push_back(cur); cur = cur->next; } // adding all OrderHistory to the vector the the most recent ordert the nearest index.
+    return v;
+}
 
-class OrderHistory {
-    public:
-        OrderHistory();
-        ~OrderHistory();
+void OrderHistory::printAll() const {
+    OrderNode* cur = head;
+    while (cur) {
+        std::cout << "Order ID: " << cur->orderId << " Customer: " << cur->customer << " Date: " << cur->date << " Total: " << cur->total << "\n";
+        for (const auto &it : cur->items) {
+            std::cout << "  - " << it.productName << " x" << it.quantity << " @ " << it.unitPrice << "\n";
+        }
+        std::cout << "\n";
+        cur = cur->next;
+    }
+}
 
-        void addOrder(OrderNode* order);
-        std::vector<OrderNode*> toVector() const; // newest first
-        void printAll() const;
 
-    private:
-        OrderNode* head; // most recent
-};
-
-#endif 

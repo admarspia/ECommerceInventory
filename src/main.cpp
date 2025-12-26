@@ -64,86 +64,87 @@ int main() {
         if (choice == 0) break;
         switch (choice) {
             case 1: {
-                        auto all = inv.allProducts();
-                        for (auto &p : all) printProduct(p);
-                        pause();
-                        break;
-                    }
+                auto all = inv.allProducts();
+                for (auto &p : all) printProduct(p);
+                pause();
+                break;
+            }
             case 2: {
-                        int id = readInt("ID: ");
-                        std::string name = readLine("Name: ");
-                        std::string cat = readLine("Category: ");
-                        double price = readDouble("Price: ");
-                        int stock = readInt("Stock: ");
-                        bool ok = inv.addProduct(Product(id, name, cat, price, stock));
-                        std::cout << (ok? "Added." : "ID already exists.") << "\n";
-                        pause();
-                        break;
-                    }
+                int id = readInt("ID: ");
+                std::string name = readLine("Name: ");
+                std::string cat = readLine("Category: ");
+                double price = readDouble("Price: ");
+                int stock = readInt("Stock: ");
+                bool ok = inv.addProduct(Product(id, name, cat, price, stock));
+                std::cout << (ok? "Added." : "ID already exists.") << "\n";
+                pause();
+                break;
+            }
             case 3: {
-                        int id = readInt("ID to remove: ");
-                        bool ok = inv.removeProductByID(id);
-                        std::cout << (ok? "Removed." : "Not found.") << "\n";
-                        pause();
-                        break;
-                    }
+                int id = readInt("ID to remove: ");
+                bool ok = inv.removeProductByID(id);
+                std::cout << (ok? "Removed." : "Not found.") << "\n";
+                pause();
+                break;
+            }
             case 4: {
-                        int id = readInt("ID: ");
-                        Product* p = inv.searchByID(id);
-                        if (p) printProduct(*p); else std::cout << "Not found\n";
-                        pause();
-                        break;
-                    }
+                int id = readInt("ID: ");
+                Product* p = inv.searchByID(id);
+                if (p) printProduct(*p); else std::cout << "Not found\n";
+                pause();
+                break;
+            }
             case 5: {
-                        std::string q = readLine("Name query: ");
-                        auto res = inv.searchByName(q);
-                        for (auto &p : res) printProduct(p);
-                        if (res.empty()) std::cout << "No match\n";
-                        pause();
-                        break;
-                    }
+                std::string q = readLine("Name query: ");
+                auto res = inv.searchByName(q);
+                for (auto &p : res) printProduct(p);
+                if (res.empty()) std::cout << "No match\n";
+                pause();
+                break;
+            }
             case 6: {
-                        std::string cat = readLine("Category: ");
-                        auto res = inv.filterByCategory(cat);
-                        for (auto &p : res) printProduct(p);
-                        if (res.empty()) std::cout << "No products in this category\n";
-                        pause();
-                        break;
-                    }
+                std::string cat = readLine("Category: ");
+                auto res = inv.filterByCategory(cat);
+                for (auto &p : res) printProduct(p);
+                if (res.empty()) std::cout << "No products in this category\n";
+                pause();
+                break;
+            }
             case 7: {
-                        int id = readInt("ID to restock: ");
-                        int q = readInt("Quantity: ");
-                        bool ok = inv.restock(id, q);
-                        std::cout << (ok? "Restocked." : "Product not found.") << "\n";
-                        pause();
-                        break;
-                    }
+                int id = readInt("ID to restock: ");
+                int q = readInt("Quantity: ");
+                bool ok = inv.restock(id, q);
+                std::cout << (ok? "Restocked." : "Product not found.") << "\n";
+                pause();
+                break;
+            }
             case 8: {
-                        std::string customer = readLine("Customer name: ");
-                        int n = readInt("How many different products in order? ");
-                        std::vector<OrderItem> items;
-                        for (int i=0;i<n;i++) {
-                            int pid = readInt("Product ID: ");
-                            int qty = readInt("Quantity: ");
-                            items.push_back({pid, "", qty, 0.0});
-                        }
-                        bool ok = inv.placeOrder(customer, items, history);
-                        std::cout << (ok? "Order placed." : "Order failed (missing product or insufficient stock).") << "\n";
-                        pause();
-                        break;
-                    }
+                std::string customer = readLine("Customer name: ");
+                int n = readInt("How many different products in order? ");
+                std::vector<OrderItem> items;
+                for (int i=0;i<n;i++) {
+                    int pid = readInt("Product ID: ");
+                    int qty = readInt("Quantity: ");
+                    items.push_back({pid, "", qty, 0.0});
+                }
+                bool ok = inv.placeOrder(customer, items, history);
+                std::cout << (ok? "Order placed." : "Order failed (missing product or insufficient stock).") << "\n";
+                pause();
+                break;
+            }
             case 9: {
-                        history.printAll();
-                        pause();
-                        break;
-                    }
+                history.printAll();
+                pause();
+                break;
+            }
             default:
-                    std::cout << "Unknown choice\n";
-                    break;
+                std::cout << "Unknown choice\n";
+                break;
         }
     }
 
     std::cout << "Goodbye\n";
     return 0;
 }
+
 
